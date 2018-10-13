@@ -1,0 +1,10 @@
+Resources: 
+  MyEc2Instance: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: t2.micro
+      KeyName: zhongz
+      ImageId: ami-0922553b7b0369273
+      Tags: 
+        - Key: name
+          Value: !Join [" ",[this is my test instance] ]

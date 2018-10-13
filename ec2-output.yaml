@@ -1,0 +1,28 @@
+Resources: 
+  MyEc2Instance: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      InstanceType: t2.micro
+      KeyName: zhongz
+      ImageId: ami-0922553b7b0369273
+      SecurityGroups: 
+        - !Ref MySecurityGroup
+      Tags: 
+        - Key: name
+          Value: !Join [" ",[this is a test instance] ]
+          
+  MySecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+          
+Outputs:
+  ServerDns:
+    Value: !GetAtt
+      - MyEc2Instance
+      - PublicDnsName
